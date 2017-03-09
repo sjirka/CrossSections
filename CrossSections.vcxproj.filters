@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{55b68f27-71d5-420d-90d0-5560ff2f49d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9d37a9b2-d40c-40fb-8d0e-1ba10c27a4cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Distance context">
+      <UniqueIdentifier>{23fbbd33-cd80-4eab-88ef-fbaea801c5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Distance context\Header files">
+      <UniqueIdentifier>{1e904287-c286-4ad2-baed-233e58247245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Distance context\Source files">
+      <UniqueIdentifier>{e198e547-2b23-4208-b2b2-635ae7905128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CrossSections node">
+      <UniqueIdentifier>{a98178b7-2a43-4efc-9922-a361ff8a3e23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CrossSections node\Header files">
+      <UniqueIdentifier>{5c2fb30c-58ba-4987-a730-072a1c52ae2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CrossSections node\Source files">
+      <UniqueIdentifier>{556c0c14-448d-4e23-a24b-cfe68e571096}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DistanceCmd.h">
+      <Filter>Distance context\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceToolCmd.h">
+      <Filter>Distance context\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceContext.h">
+      <Filter>Distance context\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsData.h">
+      <Filter>CrossSections node\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsDrawOverride.h">
+      <Filter>CrossSections node\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsManipContainer.h">
+      <Filter>CrossSections node\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsNode.h">
+      <Filter>CrossSections node\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsPlaneManip.h">
+      <Filter>CrossSections node\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="pluginSetup.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceManipContainer.h">
+      <Filter>Distance context\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceSectionManip.h">
+      <Filter>Distance context\Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_library\SSectionPlane.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_library\SPlane.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_library\SData.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsCommand.h">
+      <Filter>CrossSections node\Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DistanceCmd.cpp">
+      <Filter>Distance context\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceToolCmd.cpp">
+      <Filter>Distance context\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceContext.cpp">
+      <Filter>Distance context\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsDrawOverride.cpp">
+      <Filter>CrossSections node\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsManipContainer.cpp">
+      <Filter>CrossSections node\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsNode.cpp">
+      <Filter>CrossSections node\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsPlaneManip.cpp">
+      <Filter>CrossSections node\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="pluginMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceManipContainer.cpp">
+      <Filter>Distance context\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceSectionManip.cpp">
+      <Filter>Distance context\Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsCommand.cpp">
+      <Filter>CrossSections node\Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
