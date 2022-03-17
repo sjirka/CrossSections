@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{55b68f27-71d5-420d-90d0-5560ff2f49d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9d37a9b2-d40c-40fb-8d0e-1ba10c27a4cb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CrossSectionsCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsDrawOverride.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsManipContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossSectionsPlaneManip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceCmd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceManipContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceSectionManip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DistanceToolCmd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pluginMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_library\SPlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CrossSectionsCommand.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsData.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsDrawOverride.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsManipContainer.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsNode.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossSectionsPlaneManip.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceCmd.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceContext.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceManipContainer.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceSectionManip.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceToolCmd.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="pluginSetup.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_library\SPlane.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_library\SSectionPlane.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

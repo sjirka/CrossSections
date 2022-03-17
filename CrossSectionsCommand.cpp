@@ -145,7 +145,7 @@ MStatus CrossSectionsCommand::redoIt() {
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		if (m_useBBox) {
-			MPlug pTranslate = fnNode.findPlug("translate", &status);
+			MPlug pTranslate = fnNode.findPlug("translate", false, &status);
 			CHECK_MSTATUS_AND_RETURN_IT(status);
 			double center[4];
 			m_bBox.center().get(center);
@@ -297,7 +297,7 @@ bool CrossSectionsCommand::nodeIsConnectedToInput(MDagPath& path) {
 	MItDependencyGraph itGraph(matrixPlug, MFn::kPluginLocatorNode);
 
 	for (itGraph.reset(); !itGraph.isDone(); itGraph.next())
-		if (m_oNode == itGraph.thisNode())
+		if (m_oNode == itGraph.currentItem())
 			return true;
 
 	return false;
@@ -314,7 +314,7 @@ MStatus CrossSectionsCommand::connectGeometry(MDagPathArray& nodes) {
 	MFnDagNode fnNode(m_oNode, &status);
 	CHECK_MSTATUS_AND_RETURN_IT(status);
 
-	MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, &status);
+	MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, false, &status);
 	CHECK_MSTATUS_AND_RETURN_IT(status);
 
 	unsigned int index = 0;
@@ -360,12 +360,12 @@ MStatus CrossSectionsCommand::connectGeometry(MDagPath& path, MPlug& pInputEleme
 
 		MFnDependencyNode fnChoice(helperNode);
 
-		MPlug pOut = fnGeom.findPlug("outMesh", &status);
-		MPlug pOutSmooth = fnGeom.findPlug("outSmoothMesh", &status);
-		MPlug pDispSmooth = fnGeom.findPlug("displaySmoothMesh", &status);
+		MPlug pOut = fnGeom.findPlug("outMesh", false, &status);
+		MPlug pOutSmooth = fnGeom.findPlug("outSmoothMesh", false, &status);
+		MPlug pDispSmooth = fnGeom.findPlug("displaySmoothMesh", false, &status);
 
-		MPlug pSelector = fnChoice.findPlug("selector");
-		MPlug pInput = fnChoice.findPlug("input");
+		MPlug pSelector = fnChoice.findPlug("selector", false);
+		MPlug pInput = fnChoice.findPlug("input", false);
 		MPlug pInput0 = pInput.elementByLogicalIndex(0);
 		MPlug pInput1 = pInput.elementByLogicalIndex(1);
 		MPlug pInput2 = pInput.elementByLogicalIndex(2);
@@ -375,7 +375,7 @@ MStatus CrossSectionsCommand::connectGeometry(MDagPath& path, MPlug& pInputEleme
 		m_dagMod.connect(pOutSmooth, pInput2);
 		m_dagMod.connect(pDispSmooth, pSelector);
 
-		pOutGeometry = fnChoice.findPlug("output", &status);
+		pOutGeometry = fnChoice.findPlug("output", false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		break;}
@@ -387,19 +387,19 @@ MStatus CrossSectionsCommand::connectGeometry(MDagPath& path, MPlug& pInputEleme
 		dgMod.doIt();
 	
 		MFnDependencyNode fnTesselate(helperNode);
-		MPlug pFormat = fnTesselate.findPlug("format",&status);
-		MPlug pUNumber = fnTesselate.findPlug("uNumber", &status);
-		MPlug pVNumber = fnTesselate.findPlug("vNumber", &status);
-		MPlug pInSurface = fnTesselate.findPlug("inputSurface", &status);
-		MPlug pCrvShaded = fnGeom.findPlug("curvePrecisionShaded", &status);
-		MPlug pLocal = fnGeom.findPlug("local", &status);
+		MPlug pFormat = fnTesselate.findPlug("format", false,&status);
+		MPlug pUNumber = fnTesselate.findPlug("uNumber", false, &status);
+		MPlug pVNumber = fnTesselate.findPlug("vNumber", false, &status);
+		MPlug pInSurface = fnTesselate.findPlug("inputSurface", false, &status);
+		MPlug pCrvShaded = fnGeom.findPlug("curvePrecisionShaded", false, &status);
+		MPlug pLocal = fnGeom.findPlug("local", false, &status);
 	
 		status = m_dagMod.newPlugValueInt(pFormat, 2);
 		status = m_dagMod.connect(pCrvShaded, pUNumber);
 		status = m_dagMod.connect(pCrvShaded, pVNumber);
 		status = m_dagMod.connect(pLocal, pInSurface);
 
-		pOutGeometry = fnTesselate.findPlug("outputPolygon", &status);
+		pOutGeometry = fnTesselate.findPlug("outputPolygon", false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		break;}
@@ -411,15 +411,15 @@ MStatus CrossSectionsCommand::connectGeometry(MDagPath& path, MPlug& pInputEleme
 		dgMod.doIt();
 
 		MFnDependencyNode fnSub2Poly(helperNode);
-		MPlug pSampleCount = fnSub2Poly.findPlug("sampleCount", &status);
-		MPlug pInSubdiv = fnSub2Poly.findPlug("inSubdiv", &status);
-		MPlug pDispResolution = fnGeom.findPlug("dispResolution", &status);
-		MPlug pOutSubdiv = fnGeom.findPlug("outSubdiv", &status);
+		MPlug pSampleCount = fnSub2Poly.findPlug("sampleCount", false, &status);
+		MPlug pInSubdiv = fnSub2Poly.findPlug("inSubdiv", false, &status);
+		MPlug pDispResolution = fnGeom.findPlug("dispResolution", false, &status);
+		MPlug pOutSubdiv = fnGeom.findPlug("outSubdiv", false, &status);
 
 		status = m_dagMod.connect(pDispResolution, pSampleCount);
 		status = m_dagMod.connect(pOutSubdiv, pInSubdiv);
 
-		pOutGeometry = fnSub2Poly.findPlug("outMesh", &status);
+		pOutGeometry = fnSub2Poly.findPlug("outMesh", false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		break;}
@@ -454,7 +454,7 @@ MPlug CrossSectionsCommand::findWorldMatrixPlug(MDagPath& path, MStatus *status)
 	MFnDagNode fnGoemetry(path, status);
 	CHECK_MSTATUS_AND_RETURN(*status, MPlug());
 
-	MPlug pWorldMatrix = fnGoemetry.findPlug("worldMatrix", status);
+	MPlug pWorldMatrix = fnGoemetry.findPlug("worldMatrix", false, status);
 	CHECK_MSTATUS_AND_RETURN(*status, MPlug());
 	unsigned int plugIndex = 0;
 	for (unsigned int i = 0; i < fnGoemetry.instanceCount(true); i++) {
@@ -500,11 +500,11 @@ MStatus CrossSectionsCommand::setAttributes(MArgDatabase& argData) {
 		if (argData.isFlagSet(flag.first)) {
 			MPlug attrPlug;
 			if (COMMAND_ROTATE_FLAG == flag.first)
-				attrPlug = fnTransform.findPlug("rotate", &status);
+				attrPlug = fnTransform.findPlug("rotate", false, &status);
 			else if (COMMAND_TRANSLATE_FLAG == flag.first)
-				attrPlug = fnTransform.findPlug("translate", &status);
+				attrPlug = fnTransform.findPlug("translate", false, &status);
 			else
-				attrPlug = fnNode.findPlug(flag.second, &status);
+				attrPlug = fnNode.findPlug(flag.second, false, &status);
 			CHECK_MSTATUS_AND_RETURN_IT(status);
 
 			status = setFlagAttr(argData, flag.first, attrPlug);
@@ -531,7 +531,7 @@ MStatus CrossSectionsCommand::setAttributes(MArgDatabase& argData) {
 	}
 	// Remove geometry
 	if (argData.isFlagSet(COMMAND_REMOVE_FLAG)) {
-		MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, &status);
+		MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		for (unsigned int i = 0; i < argData.numberOfFlagUses(COMMAND_REMOVE_FLAG); i++) {
@@ -562,11 +562,11 @@ MStatus CrossSectionsCommand::queryAttributes(MArgDatabase& argData) {
 		if (argData.isFlagSet(flag.first) && !hasResult) {
 			MPlug attrPlug;
 			if (COMMAND_ROTATE_FLAG == flag.first)
-				attrPlug = fnTransform.findPlug("rotate", &status);
+				attrPlug = fnTransform.findPlug("rotate", false, &status);
 			else if (COMMAND_TRANSLATE_FLAG == flag.first)
-				attrPlug = fnTransform.findPlug("translate", &status);
+				attrPlug = fnTransform.findPlug("translate", false, &status);
 			else
-				attrPlug = fnNode.findPlug(flag.second, &status);
+				attrPlug = fnNode.findPlug(flag.second, false, &status);
 			CHECK_MSTATUS_AND_RETURN_IT(status);
 
 			status = queryAttrValue(attrPlug);
@@ -577,7 +577,7 @@ MStatus CrossSectionsCommand::queryAttributes(MArgDatabase& argData) {
 	
 	// Query inputs
 	if(!hasResult && (argData.isFlagSet(COMMAND_INPUTS_FLAG) || argData.isFlagSet(COMMAND_OBJECTS_FLAG))){
-		MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, &status);
+		MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 		for (unsigned int i = 0; i < pInput.numElements(); i++) {
 			MPlug pInputElement = pInput.elementByPhysicalIndex(i, &status);
@@ -591,7 +591,7 @@ MStatus CrossSectionsCommand::queryAttributes(MArgDatabase& argData) {
 				MItDependencyGraph itGraph(pInputGeometry, MFn::kInvalid, MItDependencyGraph::kUpstream);
 
 				for (itGraph.reset(); !itGraph.isDone(); itGraph.next()) {
-					MObject node = itGraph.thisNode();
+					MObject node = itGraph.currentItem();
 
 					if (node.apiType() != MFn::kMesh &&
 						node.apiType() != MFn::kNurbsSurface &&
@@ -608,9 +608,9 @@ MStatus CrossSectionsCommand::queryAttributes(MArgDatabase& argData) {
 	}
 	// Query curves
 	else if (!hasResult && argData.isFlagSet(COMMAND_CURVES_FLAG)) {
-		MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, &status);
+		MPlug pInput = fnNode.findPlug(CrossSectionsNode::aInput, false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
-		MPlug pOutput = fnNode.findPlug(CrossSectionsNode::aOutput, &status);
+		MPlug pOutput = fnNode.findPlug(CrossSectionsNode::aOutput, false, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		if (pOutput.numElements() > 0) {
@@ -638,7 +638,7 @@ MStatus CrossSectionsCommand::queryAttributes(MArgDatabase& argData) {
 
 					MItDependencyGraph itGraph(pInputGeometry, MFn::kInvalid, MItDependencyGraph::kUpstream);
 					for (itGraph.reset(); !itGraph.isDone(); itGraph.next()) {
-						MObject node = itGraph.thisNode();
+						MObject node = itGraph.currentItem();
 
 						if (node.apiType() != MFn::kMesh &&
 							node.apiType() != MFn::kNurbsSurface &&
@@ -663,7 +663,7 @@ MStatus CrossSectionsCommand::queryAttributes(MArgDatabase& argData) {
 						CHECK_MSTATUS_AND_RETURN_IT(status);
 						MFnDagNode fnCurve(oSectionCurve, &status);
 						CHECK_MSTATUS_AND_RETURN_IT(status);
-						status = fnCurve.findPlug("create").setMObject(pOutputSectionsElement.asMObject());
+						status = fnCurve.findPlug("create", false).setMObject(pOutputSectionsElement.asMObject());
 						CHECK_MSTATUS_AND_RETURN_IT(status);
 					}
 				}
